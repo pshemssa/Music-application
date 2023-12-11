@@ -2,8 +2,7 @@
 function getChannelVideos() {
   const apiKey = 'AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE';
   const channelInput = document.getElementById('channelInput').value;
-  const apiUrl = https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelInput}&type=video&key=${AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE};
-
+  const apiUrl = https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelInput}&type=video&apiKey
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
