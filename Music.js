@@ -8,7 +8,7 @@ function searchVideo() {
   const songName = document.getElementById("song-name").value;
   resultContainer.innerHTML = "Searching...";
   
-  const apiUrl = `https://www.googleapis.com/youtube/v3/search?q=${encodeURIComponent(songName)}&key=${https://rapidapi.com/cavsn/api/youtube-music-api-detailed/}&part=snippet&type=video`;
+  const apiUrl = `https://www.googleapis.com/youtube/v3/search?q=${encodeURIComponent(songName)}&key=${AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE/}&part=snippet&type=video`;
   
   fetch(apiUrl)
     .then(response => response.json())
