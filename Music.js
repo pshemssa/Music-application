@@ -1,6 +1,6 @@
 const resultContainer = document.getElementById("result-container");
 const searchButton = document.getElementById("search-button");
-const youtubeApiKey = "https://rapidapi.com/cavsn/api/youtube-music-api-detailed/"; // Replace with your actual YouTube Data API key
+const youtubeApiKey = "AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE"; // Replace with your actual YouTube Data API key
 
 searchButton.addEventListener("click", searchVideo);
 
