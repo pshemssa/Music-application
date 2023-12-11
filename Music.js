@@ -1,36 +1,33 @@
-const resultContainer = document.getElementById("result-container");
-const searchButton = document.getElementById("search-button");
-const youtubeApiKey = "AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE"; // Replace with your actual YouTube Data API key
+// app.js
+const API_KEY = 'AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE';
 
-searchButton.addEventListener("click", searchVideo);
+function searchYouTube() {
+    const searchTerm = document.getElementById('search-input').value;
+    const apiUrl = `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE}`;
 
-function searchVideo() {
-  const songName = document.getElementById("song-name").value;
-  resultContainer.innerHTML = "Searching...";
-  
-  const apiUrl = `https://www.googleapis.com/youtube/v3/search?q=${encodeURIComponent(songName)}&key=${AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE/}&part=snippet&type=video`;
-  
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      if (data.items.length > 0) {
-        const videoInfo = data.items[0].snippet;
-        const videoTitle = videoInfo.title;
-        const videoId = data.items[0].id.videoId;
-        
-        const resultHTML = `
-          <h2>${videoTitle}</h2>
-          <p>Video ID: ${videoId}</p>
-          <p>Watch on YouTube: <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">Watch Now</a></p>
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => displayResults(data.items))
+        .catch(error => console.error('Error:', error));
+}
+
+function displayResults(items) {
+    const resultsContainer = document.getElementById('results-container');
+    resultsContainer.innerHTML = '';
+
+    items.forEach(item => {
+        const videoId = item.id.videoId;
+        const title = item.snippet.title;
+        const thumbnailUrl = item.snippet.thumbnails.medium.url;
+
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-item';
+        resultItem.innerHTML = `
+            <img src="${thumbnailUrl}" alt="${title}">
+            <p>${title}</p>
+            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">Watch on YouTube</a>
         `;
-        
-        resultContainer.innerHTML = resultHTML;
-      } else {
-        resultContainer.innerHTML = "No results found.";
-      }
-    })
-    .catch(error => {
-      console.error("An error occurred:", error);
-      resultContainer.innerHTML = "An error occurred while fetching data.";
+
+        resultsContainer.appendChild(resultItem);
     });
 }
