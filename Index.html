@@ -1,18 +1,23 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Music Search App</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>YouTube Music App</title>
 </head>
 <body>
-  <h1>Music Search App</h1>
-  <div id="search-container">
-    <input type="text" id="song-name" placeholder="Enter a song name" value= "">
-    <button id="search-button">Search Song</button>
-  </div>
-  <div id="result-container"></div>
-  <script src="Music.js"></script>
+    <header>
+        <h1>YouTube Music App</h1>
+    </header>
+    <main>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Enter artist or song">
+            <button onclick="searchYouTube()">Search</button>
+        </div>
+        <div id="results-container"></div>
+    </main>
+    <script src="app.js"></script>
 </body>
 </html>
