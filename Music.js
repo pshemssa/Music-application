@@ -1,33 +1,22 @@
 // app.js
-const API_KEY = 'AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE';
+function getChannelVideos() {
+  const apiKey = 'AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE';
+  const channelInput = document.getElementById('channelInput').value;
+  const apiUrl = https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelInput}&type=video&key=${AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE};
 
-function searchYouTube() {
-    const searchTerm = document.getElementById('search-input').value;
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${AIzaSyDUiqXdXghTDBwmfgUJyUKbCm2dg3ndrIE}`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => displayResults(data.items))
-        .catch(error => console.error('Error:', error));
-}
-
-function displayResults(items) {
-    const resultsContainer = document.getElementById('results-container');
-    resultsContainer.innerHTML = '';
-
-    items.forEach(item => {
-        const videoId = item.id.videoId;
-        const title = item.snippet.title;
-        const thumbnailUrl = item.snippet.thumbnails.medium.url;
-
-        const resultItem = document.createElement('div');
-        resultItem.className = 'result-item';
-        resultItem.innerHTML = `
-            <img src="${thumbnailUrl}" alt="${title}">
-            <p>${title}</p>
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">Watch on YouTube</a>
-        `;
-
-        resultsContainer.appendChild(resultItem);
-    });
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const youtubeDataElement = document.getElementById('youtubeData');
+      if (data.error) {
+        youtubeDataElement.innerHTML = <p>Error: ${data.error.message}</p>;
+      } else {
+        const videos = data.items;
+        youtubeDataElement.innerHTML = '<h2>Channel Videos</h2>';
+        videos.forEach(video => {
+          youtubeDataElement.innerHTML += <p>${video.snippet.title}</p>;
+        });
+      }
+    })
+    .catch(error => console.error('Error fetching data:', error));
 }
